@@ -15,8 +15,17 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path,include
+from django.conf import settings
+from django.conf.urls.static import static
+from django.shortcuts import render
+
+def angular_frontend(request):
+    return render(request, 'common/index.html')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('blog_crud/api/', include('blog_crud_apis.urls')),
+    path('', angular_frontend, name='index')
 ]
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

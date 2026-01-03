@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-%y9koigtd!3r&a0p3l!pj1p_-b+z=_u-1_16t$&)1_pi9fk0c&
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -37,9 +37,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
+    'rest_framework',
+    'blog_crud_apis'
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -54,7 +58,7 @@ ROOT_URLCONF = 'blogApis.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR, 'common'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -68,6 +72,11 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'blogApis.wsgi.application'
 
+CORS_ALLOWED_ORIGINS=[
+    'http://localhost:4200',
+    'http://localhost:8000',
+    'http://127.0.0.1:8000'
+]
 
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
@@ -115,3 +124,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+MEDIA_URL='media/'
+MEDIA_ROOT=BASE_DIR/'media'
+STATICFILES_DIRS=[BASE_DIR, 'common']
