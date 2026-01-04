@@ -1,0 +1,27 @@
+<h2>ADD BLOG FORM</h2>
+<form [formGroup]="blogform" (ngSubmit)="submitBlog()"
+    style="width: 40%; margin-left: 100px; margin-bottom: 100px; padding: 15px; box-shadow:  5px 5px 0 5px rgba(0, 0, 0, 0.3);">
+
+
+    <input type="text" placeholder="Blog Title" class="form-control" formControlName="title" />
+    <textarea rows="6" placeholder="Blog Content" class="form-control" formControlName="body"></textarea>
+    <select class="form-select" formControlName="author_id">
+        <option value="">Select Author</option>
+        <option *ngFor="let item of author" [value]="item.id">
+            {{ item.name }}
+        </option>
+    </select>
+
+
+    <label> Select categories</label>
+    <select class="form-select" multiple aria-label="Multiple select example" size="3" formControlName="category_ids">
+        <option *ngFor="let cat of category" [value]="cat.id">
+            {{ cat.category_name }}
+        </option>
+    </select>
+    <input type="file" class="form-control" (change)="onImageChange($event)"  formControlName="image"/>
+
+
+    <button type="submit" class="btn btn-primary">Add Blog ➕</button>
+
+</form>
